@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"strings"
+	"time"
 )
 
 func main() {
@@ -14,6 +15,8 @@ func main() {
 	correctAnswers = 0
 
 	csvFileName := flag.String("csv", "problems.csv", "a csv file containing records of questions and answers")
+	timerLimit := flag.Int("timelimit", 30, "the time limit for quiz in seconds")
+
 	flag.Parse()
 	file, err := os.Open(*csvFileName)
 	if err != nil {
@@ -32,17 +35,30 @@ func main() {
 
 	parsedRecords := parseRecords(records)
 
+	timer := time.NewTimer(time.Duration(*timerLimit) * time.Second)
+
 	for i, record := range parsedRecords {
-		var answer string
 		fmt.Printf("[%d] Enter Answer for %s\n", i+1, record.question)
-		fmt.Scanf("%s\n", &answer)
-		if answer == record.answer {
-			correctAnswers += 1
+		answerCh := make(chan string)
+		go func() {
+			var answer string
+
+			fmt.Scanf("%s\n", &answer)
+			answerCh <- answer
+		}()
+
+		select {
+		case <-timer.C:
+			fmt.Printf("🎉 SCORE %d of %d\n", correctAnswers, len(parsedRecords))
+			return
+		case answer := <-answerCh:
+			if answer == record.answer {
+				correctAnswers += 1
+			}
 		}
 	}
 
 	fmt.Printf("🎉 SCORE %d of %d\n", correctAnswers, len(parsedRecords))
-
 }
 
 type problem struct {
