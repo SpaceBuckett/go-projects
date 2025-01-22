@@ -51,6 +51,28 @@ a fun and interactive quiz app right to your console!
 - Flags
 ---
 
+## Project 02 - URL Shortner (MUX)
+![.](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmg2djB1MnVjNTJxZHlydHJ5YzExejNiNmpsdXp5MmoyN2F5eHlkdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/eHLUenDDkeIp5IEPgp/giphy.gif)
+
+A Url shortner is a basic short project that routes the user to the urls using the short urls. 
+For example to go to the codeasthetics youtube channel, you will only requred to pass the code asthetics
+rather than entering entire url. 
+
+### How it works?:
+- Define a map with short URLs as keys and long URLs as values.
+- Set up a Go HTTP server that listens to incoming requests.
+- Match the requested URL path with the map and redirect if a match is found.
+- If no match exists, return a friendly 404 error.
+
+### What I Learned:
+- Understanding Go's net/http package and basic routing.
+- Gaining insights into gorilla/mux and how it simplifies advanced routing.
+- Working with maps, HTTP handlers, YAML, and middleware.
+- Understood the concept of MUX - from DLD
+
+---
+
+
 ## 🎯 Connect  
 If you like this repository or want to share feedback, feel free to connect:  
 - GitHub: [Your Profile](https://github.com/spacebuckett)  
