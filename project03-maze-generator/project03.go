@@ -14,11 +14,27 @@ func main() {
 		graph[b] = append(graph[b], a)
 	}
 
+	printGraph(numNodes, graph)
+	displayGrid(numNodes, graph)
+
+}
+
+func contains(slice []int, number int) bool {
+	for _, value := range slice {
+		if value == number {
+			return true
+		}
+	}
+	return false
+}
+
+func printGraph(numNodes int, graph [][]int) {
 	for i := 1; i <= numNodes; i++ {
 		fmt.Printf("%d: %v\n", i, graph[i])
 	}
+}
 
-	// making a display of graph
+func displayGrid(numNodes int, graph [][]int) {
 
 	for i := 0; i <= numNodes; i++ {
 		for j := 0; j <= numNodes; j++ {
@@ -37,13 +53,5 @@ func main() {
 		}
 		fmt.Println()
 	}
-}
 
-func contains(slice []int, number int) bool {
-	for _, value := range slice {
-		if value == number {
-			return true
-		}
-	}
-	return false
 }
